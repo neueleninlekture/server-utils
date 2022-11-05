@@ -103,6 +103,7 @@ echo "DOWNLOADING WEBSITE DATA"
 git clone https://github.com/neueleninlekture/mirror-tools.git /var/www/communists
 cd /var/www/communists/
 ./mirror.sh
+cd 
 
 ## clone the mailscript
 echo "CLONING MAIL SCRIPT..."
