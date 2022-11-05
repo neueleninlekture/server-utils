@@ -5,7 +5,7 @@
 ## packages
 echo "UPDATING PACKAGES..."
 apt update && apt upgrade
-apt install git curl rsync nginx python3-certbot-nginx texlive texlive-xetex groff pandoc make neovim ufw
+apt install neovim git curl rsync nginx python3-certbot-nginx ufw texlive texlive-xetex groff ghostscript pandoc make 
 
 ## networking
 echo "SETTING UP NETWORKING..."
