@@ -52,8 +52,6 @@ ufw allow in 'Mail Submission'
 ## bashrc
 echo "SETTING UP BASH..."
 echo "# abe's bashrc
-export PS1='e[34m\]\W\[\e[m\]\[\e[35m\] λ\[\e[m\] '
-
 shopt -s autocd
 
 alias grep='grep --color=auto'
@@ -103,7 +101,8 @@ certbot --nginx
 ## set up the site
 echo "DOWNLOADING WEBSITE DATA"
 git clone https://github.com/neueleninlekture/mirror-tools.git /var/www/communists
-/var/www/communists/mirror.sh
+cd /var/www/communists/
+./mirror.sh
 
 ## clone the mailscript
 echo "CLONING MAIL SCRIPT..."
