@@ -78,6 +78,7 @@ mkcd () {
 alias vi='nvim'
 alias wget='wget -c'
 " > ~/.bashrc
+source ~/.bashrc
 
 ## nginx
 echo "SETTING UP NGINX..."
