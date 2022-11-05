@@ -91,7 +91,6 @@ sed -i 's/\/var\/www\/html/\/var\/www\/mail/g' /etc/nginx/sites-available/mail
 sed -i 's/_;/mail.communists.world;/g' /etc/nginx/sites-available/mail 
 
 ln -s /etc/nginx/sites-available/communists /etc/nginx/sites-enabled/
-# ln -s /etc/nginx/sites-available/mail /etc/nginx/sites-enabled/
 echo "Main site enabled, mail site kept disabled for now"
 
 systemctl reload nginx
@@ -104,3 +103,8 @@ certbot --nginx
 echo "DOWNLOADING WEBSITE DATA"
 git clone https://github.com/neueleninlekture/mirror-tools.git /var/www/communists
 /var/www/communists/mirror.sh
+
+## clone the mailscript
+echo "CLONING MAIL SCRIPT..."
+curl -LO lukesmith.xyz/emailwiz.sh
+echo "Mail script downloaded, run manually to set up. Don't forget to enable nginx site as well."
