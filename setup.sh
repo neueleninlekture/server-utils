@@ -9,7 +9,7 @@ apt install git curl rsync nginx python3-certbot-nginx texlive texlive-xetex gro
 
 ## networking
 echo "SETTING UP NETWORKING..."
-sed10q -i /etc/network/interfaces 
+sed 10q -i /etc/network/interfaces 
 echo "auto eth0" >> /etc/network/interfaces
 
 echo "iface eth0 inet6 static" >> /etc/network/interfaces
