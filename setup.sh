@@ -5,11 +5,11 @@
 ## packages
 echo "UPDATING PACKAGES..."
 apt update && apt upgrade
-apt install wget curl rsync nginx python3-certbot-nginx texlive texlive-xetex groff pandoc make neovim ufw
+apt install git curl rsync nginx python3-certbot-nginx texlive texlive-xetex groff pandoc make neovim ufw
 
 ## networking
 echo "SETTING UP NETWORKING..."
-head /etc/network/interfaces > /etc/network/interfaces
+sed10q -i /etc/network/interfaces 
 echo "auto eth0" >> /etc/network/interfaces
 
 echo "iface eth0 inet6 static" >> /etc/network/interfaces
@@ -106,5 +106,5 @@ git clone https://github.com/neueleninlekture/mirror-tools.git /var/www/communis
 
 ## clone the mailscript
 echo "CLONING MAIL SCRIPT..."
-curl -LO lukesmith.xyz/emailwiz.sh
+wget lukesmith.xyz/emailwiz.sh
 echo "Mail script downloaded, run manually to set up. Don't forget to enable nginx site as well."
