@@ -111,4 +111,10 @@ echo "CLONING MAIL SCRIPT..."
 wget lukesmith.xyz/emailwiz.sh
 chmod +x emailwiz.sh
 ./emailwiz.sh
-echo "ALL DONE! SERVER-SIDE FULLY SET UP"
+
+## adding mail user accounts
+echo "CREATING MAIL USER ACCOUNTS..."
+printf "New mail user name: "
+read -r new_user
+useradd -G mail -m $new_user
+passwd $new_user
