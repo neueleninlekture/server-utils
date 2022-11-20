@@ -10,7 +10,7 @@ echo "$custom_hostname" > /etc/hostname
 ## packages
 echo "UPDATING PACKAGES..."
 apt update && apt upgrade
-apt install neovim git curl rsync nginx python3-certbot-nginx ufw texlive texlive-xetex groff ghostscript pandoc make 
+apt install neovim git curl rsync nginx python3-certbot-nginx ufw texlive texlive-xetex groff ghostscript pandoc make sudo
 
 ## networking
 echo "SETTING UP NETWORKING..."
