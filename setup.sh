@@ -2,6 +2,11 @@
 # yes i will edit system files from a script run as root
 # no you cannot stop me
 
+## hostname
+printf "System hostname: "
+read -r custom_hostname
+echo "$custom_hostname" > /etc/hostname
+
 ## packages
 echo "UPDATING PACKAGES..."
 apt update && apt upgrade
