@@ -23,7 +23,8 @@ printf "IPV6 Gateway: "
 read -r ipv6_gate
 echo "	gateway $ipv6_gate" >> /etc/network/interfaces
 
-echo "\n" >> /etc/network/interfaces
+echo "\
+" >> /etc/network/interfaces
 echo "iface eth0 inet static" >> /etc/network/interfaces
 printf "IPV4 Address: "
 read -r ipv4_addr
