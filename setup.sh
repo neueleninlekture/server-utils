@@ -1,22 +1,23 @@
-### server quick setup script
+### personal server quick setup script
 # yes i will edit system files from a script run as root
 # no you cannot stop me
 
-## hostname
+## choose hostname
 printf "System hostname: "
 read -r custom_hostname
 echo "$custom_hostname" > /etc/hostname
 
-## packages
+## update system and install basic packages
 echo "UPDATING PACKAGES..."
 apt update && apt upgrade
-apt install neovim git curl rsync nginx python3-certbot-nginx ufw texlive texlive-xetex groff ghostscript pandoc make sudo
+apt install neovim git curl rsync nginx python3-certbot-nginx ufw make sudo
 
-## networking
+## finicky networking stuff
 echo "SETTING UP NETWORKING..."
 sed 10q -i /etc/network/interfaces 
 echo "auto eth0" >> /etc/network/interfaces
 
+# ipv6 configuration (open buyvm stallion for this info)
 echo "iface eth0 inet6 static" >> /etc/network/interfaces
 printf "IPV6 Address: "
 read -r ipv6_addr
@@ -28,6 +29,7 @@ printf "IPV6 Gateway: "
 read -r ipv6_gate
 echo "	gateway $ipv6_gate" >> /etc/network/interfaces
 
+# same as above but for ipv4
 echo "\
 " >> /etc/network/interfaces
 echo "iface eth0 inet static" >> /etc/network/interfaces
@@ -41,12 +43,12 @@ printf "IPV4 Gateway: "
 read -r ipv4_gate
 echo "	gateway $ipv4_gate" >> /etc/network/interfaces
 
-## ssh
+## disabing ssh password login
 echo "DISABLING SSH PASSWORD LOGIN..."
 sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config 
 sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config 
 
-## ufw
+## ufw. allow ssh and mail
 echo "SETTING UP FIREWALL..."
 ufw default deny incoming
 ufw allow in ssh
@@ -85,32 +87,32 @@ alias wget='wget -c'
 " > ~/.bashrc
 source ~/.bashrc
 
-## nginx
-echo "SETTING UP NGINX..."
-sed -i '/^#/d' /etc/nginx/sites-available/default
-sed -i 's/default_server//g' /etc/nginx/sites-available/default
-cp /etc/nginx/sites-available/default /etc/nginx/sites-available/communists
-sed -i 's/\/var\/www\/html/\/var\/www\/communists/g' /etc/nginx/sites-available/communists 
-sed -i 's/_;/communists.world;/g' /etc/nginx/sites-available/communists 
-cp /etc/nginx/sites-available/default /etc/nginx/sites-available/mail
-sed -i 's/\/var\/www\/html/\/var\/www\/mail/g' /etc/nginx/sites-available/mail 
-sed -i 's/_;/mail.communists.world;/g' /etc/nginx/sites-available/mail 
+# ## nginx
+# echo "SETTING UP NGINX..."
+# sed -i '/^#/d' /etc/nginx/sites-available/default
+# sed -i 's/default_server//g' /etc/nginx/sites-available/default
+# cp /etc/nginx/sites-available/default /etc/nginx/sites-available/communists
+# sed -i 's/\/var\/www\/html/\/var\/www\/communists/g' /etc/nginx/sites-available/communists 
+# sed -i 's/_;/communists.world;/g' /etc/nginx/sites-available/communists 
+# cp /etc/nginx/sites-available/default /etc/nginx/sites-available/mail
+# sed -i 's/\/var\/www\/html/\/var\/www\/mail/g' /etc/nginx/sites-available/mail 
+# sed -i 's/_;/mail.communists.world;/g' /etc/nginx/sites-available/mail 
 
-ln -s /etc/nginx/sites-available/communists /etc/nginx/sites-enabled/
-ln -s /etc/nginx/sites-available/mail /etc/nginx/sites-enabled/
+# ln -s /etc/nginx/sites-available/communists /etc/nginx/sites-enabled/
+# ln -s /etc/nginx/sites-available/mail /etc/nginx/sites-enabled/
 
-systemctl reload nginx
+# systemctl reload nginx
 
-## certbot
-echo "SETTING UP CERTBOT..."
-certbot --nginx
+# ## certbot
+# echo "SETTING UP CERTBOT..."
+# certbot --nginx
 
-## set up the site
-echo "DOWNLOADING WEBSITE DATA..."
-git clone https://github.com/neueleninlekture/mirror-tools.git /var/www/communists
-cd /var/www/communists/
-./mirror.sh
-cd 
+# ## set up the site
+# echo "DOWNLOADING WEBSITE DATA..."
+# git clone https://github.com/neueleninlekture/mirror-tools.git /var/www/communists
+# cd /var/www/communists/
+# ./mirror.sh
+# cd 
 
 ## clone the mailscript
 echo "CLONING MAIL SCRIPT..."
