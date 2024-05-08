@@ -87,30 +87,37 @@ alias wget='wget -c'
 " > ~/.bashrc
 source ~/.bashrc
 
-# ## nginx
-# echo "SETTING UP NGINX..."
-# sed -i '/^#/d' /etc/nginx/sites-available/default
-# sed -i 's/default_server//g' /etc/nginx/sites-available/default
-# cp /etc/nginx/sites-available/default /etc/nginx/sites-available/communists
-# sed -i 's/\/var\/www\/html/\/var\/www\/communists/g' /etc/nginx/sites-available/communists 
-# sed -i 's/_;/communists.world;/g' /etc/nginx/sites-available/communists 
-# cp /etc/nginx/sites-available/default /etc/nginx/sites-available/mail
-# sed -i 's/\/var\/www\/html/\/var\/www\/mail/g' /etc/nginx/sites-available/mail 
-# sed -i 's/_;/mail.communists.world;/g' /etc/nginx/sites-available/mail 
+## nginx
+echo "SETTING UP NGINX..."
 
-# ln -s /etc/nginx/sites-available/communists /etc/nginx/sites-enabled/
-# ln -s /etc/nginx/sites-available/mail /etc/nginx/sites-enabled/
+printf "Main site name (e.g.: abe): "
+read -r new_site_name
 
-# systemctl reload nginx
+printf "Main site domain (e.g.: abe.net.br): "
+read -r new_site_domain
 
-# ## certbot
-# echo "SETTING UP CERTBOT..."
-# certbot --nginx
+sed -i '/^#/d' /etc/nginx/sites-available/default
+sed -i 's/default_server//g' /etc/nginx/sites-available/default
+cp /etc/nginx/sites-available/default /etc/nginx/sites-available/$new_site_name
+sed -i 's/\/var\/www\/html/\/var\/www\/$new_site_name/g' /etc/nginx/sites-available/$new_site_name 
+sed -i 's/_;/$main_site_domain;/g' /etc/nginx/sites-available/$new_site_name 
+cp /etc/nginx/sites-available/default /etc/nginx/sites-available/mail
+sed -i 's/\/var\/www\/html/\/var\/www\/mail/g' /etc/nginx/sites-available/mail 
+sed -i 's/_;/mail.$new_site_domain;/g' /etc/nginx/sites-available/mail 
+
+ln -s /etc/nginx/sites-available/$new_site_name /etc/nginx/sites-enabled/
+ln -s /etc/nginx/sites-available/mail /etc/nginx/sites-enabled/
+
+systemctl reload nginx
+
+## certbot
+echo "SETTING UP CERTBOT..."
+certbot --nginx
 
 # ## set up the site
 # echo "DOWNLOADING WEBSITE DATA..."
-# git clone https://github.com/neueleninlekture/mirror-tools.git /var/www/communists
-# cd /var/www/communists/
+# git clone https://github.com/neueleninlekture/mirror-tools.git /var/www/$new_site_name
+# cd /var/www/$new_site_name/
 # ./mirror.sh
 # cd 
 
