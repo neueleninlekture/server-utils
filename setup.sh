@@ -114,15 +114,15 @@ source ~/.bashrc
 # ./mirror.sh
 # cd 
 
-## clone the mailscript
-echo "CLONING MAIL SCRIPT..."
-wget lukesmith.xyz/emailwiz.sh
-chmod +x emailwiz.sh
-./emailwiz.sh
+# ## clone the mailscript
+# echo "CLONING MAIL SCRIPT..."
+# wget lukesmith.xyz/emailwiz.sh
+# chmod +x emailwiz.sh
+# ./emailwiz.sh
 
-## adding mail user accounts
-echo "CREATING MAIL USER ACCOUNTS..."
-printf "New mail user name: "
-read -r new_user
-useradd -G mail -m $new_user
-passwd $new_user
+# ## adding mail user accounts
+# echo "CREATING MAIL USER ACCOUNTS..."
+# printf "New mail user name: "
+# read -r new_user
+# useradd -G mail -m $new_user
+# passwd $new_user
