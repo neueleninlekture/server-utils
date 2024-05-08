@@ -87,32 +87,32 @@ alias wget='wget -c'
 " > ~/.bashrc
 source ~/.bashrc
 
-## nginx
-echo "SETTING UP NGINX..."
+# ## nginx
+# echo "SETTING UP NGINX..."
 
-printf "Main site name (e.g.: abe): "
-read -r new_site_name
+# printf "Main site name (e.g.: abe): "
+# read -r new_site_name
 
-printf "Main site domain (e.g.: abe.net.br): "
-read -r new_site_domain
+# printf "Main site domain (e.g.: abe.net.br): "
+# read -r new_site_domain
 
-sed -i '/^#/d' /etc/nginx/sites-available/default
-sed -i 's/default_server//g' /etc/nginx/sites-available/default
-cp /etc/nginx/sites-available/default /etc/nginx/sites-available/$new_site_name
-sed -i 's/\/var\/www\/html/\/var\/www\/$new_site_name/g' /etc/nginx/sites-available/$new_site_name 
-sed -i 's/_;/$main_site_domain;/g' /etc/nginx/sites-available/$new_site_name 
-cp /etc/nginx/sites-available/default /etc/nginx/sites-available/mail
-sed -i 's/\/var\/www\/html/\/var\/www\/mail/g' /etc/nginx/sites-available/mail 
-sed -i 's/_;/mail.$new_site_domain;/g' /etc/nginx/sites-available/mail 
+# sed -i '/^#/d' /etc/nginx/sites-available/default
+# sed -i 's/default_server//g' /etc/nginx/sites-available/default
+# cp /etc/nginx/sites-available/default /etc/nginx/sites-available/$new_site_name
+# sed -i 's/\/var\/www\/html/\/var\/www\/$new_site_name/g' /etc/nginx/sites-available/$new_site_name 
+# sed -i 's/_;/$main_site_domain;/g' /etc/nginx/sites-available/$new_site_name 
+# cp /etc/nginx/sites-available/default /etc/nginx/sites-available/mail
+# sed -i 's/\/var\/www\/html/\/var\/www\/mail/g' /etc/nginx/sites-available/mail 
+# sed -i 's/_;/mail.$new_site_domain;/g' /etc/nginx/sites-available/mail 
 
-ln -s /etc/nginx/sites-available/$new_site_name /etc/nginx/sites-enabled/
-ln -s /etc/nginx/sites-available/mail /etc/nginx/sites-enabled/
+# ln -s /etc/nginx/sites-available/$new_site_name /etc/nginx/sites-enabled/
+# ln -s /etc/nginx/sites-available/mail /etc/nginx/sites-enabled/
 
-systemctl reload nginx
+# systemctl reload nginx
 
-## certbot
-echo "SETTING UP CERTBOT..."
-certbot --nginx
+# ## certbot
+# echo "SETTING UP CERTBOT..."
+# certbot --nginx
 
 # ## set up the site
 # echo "DOWNLOADING WEBSITE DATA..."
